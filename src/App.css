@@ -1,0 +1,47 @@
+.App {
+  width: 800px;
+  height: 900px;
+  margin: 3% auto;
+  background-color: lightskyblue;
+  color: black;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor {
+  height: 800px;
+  width: 700px;
+  margin: 0 auto;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 8%;
+  border: 1px solid grey;
+}
+
+p {
+  text-align: left;
+  margin: 0.5rem 0.5rem;
+}
+
+input {
+  background-color: bisque;
+  height: 30px;
+}
+
+.button {
+  background-color: dodgerblue;
+  width: 120px;
+  height: 30px;
+  margin-top: 25px;
+  color: white;
+  border: 1px solid #000;
+}
+
+h2 {
+  padding-top: 40px;
+}
