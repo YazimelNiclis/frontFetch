@@ -1,10 +1,8 @@
 import { useState } from "react";
-import "./App.css";
+import "./registro.css";
 import { useForm } from "react-hook-form";
-import { consultarTelefonos } from "./api/rule_usuario";
-import { Link, useNavigate } from "react-router-dom";
 
-function App() {
+function Registro() {
   const [agenda, setAgenda] = useState([]);
   const {
     register,
@@ -12,7 +10,6 @@ function App() {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
   /*   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nombre, setNombre] = useState("");
@@ -62,8 +59,9 @@ function App() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     var raw = JSON.stringify({
-      email: data.email,
-      password: data.password,
+      id: data.id,
+      name: data.name,
+      number: data.number,
     });
     var requestOptions = {
       method: "POST",
@@ -74,13 +72,12 @@ function App() {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/api/usuario/login",
+        "http://localhost:8000/api/telefonos",
         requestOptions
       );
       if (response.ok) {
         const respuesta = await response.json();
-        localStorage.setItem("token", respuesta.token);
-        navigate("home");
+        alert(respuesta.mensaje);
       } else {
         const respuesta = await response.json();
         alert("ERROR!!! " + respuesta.error);
@@ -101,19 +98,26 @@ function App() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <h2>Cargar un nuevo telefono</h2>
           <br />
-          <label htmlFor="Email" className="item">
-            <p>Email *</p>
-            <input placeholder="Email*" {...register("email")} />
+          <label htmlFor="Id" className="item">
+            <p>Id *</p>
+            <input placeholder="Id*" {...register("id")} />
             <br />
           </label>
           <br />
-          <label htmlFor="Password" className="item">
+          <label htmlFor="Name" className="item">
             <br />
-            <p>Password *</p>
+            <p>Name *</p>
+            <input placeholder="Name*" {...register("name")} />
+            <br />
+          </label>
+
+          <label htmlFor="Number" className="item">
+            <br />
+            <p>Number *</p>
             <input
-              type="password"
-              placeholder="Password*"
-              {...register("password")}
+              type="number"
+              placeholder="Number*"
+              {...register("number")}
             />
             <br />
           </label>
@@ -121,7 +125,17 @@ function App() {
           <br />
           <br />
           <br />
-
+          <button className="button" type="button" onClick={consultaGet}>
+            Consultar agenda
+          </button>
+          {agenda &&
+            agenda.map((telefono) => {
+              return (
+                <div>
+                  Nombre: {telefono.name} || Número: {telefono.number}
+                </div>
+              );
+            })}
           <br />
           <button className="button" type="submit">
             Ingresar
@@ -132,4 +146,4 @@ function App() {
   );
 }
 
-export default App;
+export default Registro;
